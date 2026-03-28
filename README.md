@@ -1,4 +1,4 @@
-# Team 2: e-motion: Privacy-First HR Analytics
+# Team 2: e-motion
 
 e-motion is a specialized, privacy-first organizational clarity platform designed to track structural team wellbeing, context switching, and cognitive flow without compromising individual data privacy (enforcing aggregated strict minimum thresholds, e.g., n > 5).
 
