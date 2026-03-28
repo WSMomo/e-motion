@@ -4,18 +4,27 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from './components/ui/Button';
-import { Activity, ShieldCheck, ArrowRight, EyeOff, BarChart3, Users, Zap, CheckCircle2, Lock, Focus } from 'lucide-react';
+import { Activity, ShieldCheck, ArrowRight, EyeOff, BarChart3, Users, Zap, CheckCircle2, Lock, Focus, BrainCircuit, Sparkles } from 'lucide-react';
 import { useRef } from 'react';
 
 export default function LandingPage() {
   const scrollRef = useRef(null);
+  const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: scrollRef,
     offset: ["start start", "end end"]
   });
   
+  const { scrollYProgress: sectionScrollY } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+  
   const yHeroText = useTransform(scrollYProgress, [0, 0.2], ["0%", "30%"]);
   const opacityHero = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+
+  const xText1 = useTransform(sectionScrollY, [0, 1], ["-350px", "350px"]);
+  const xText2 = useTransform(sectionScrollY, [0, 1], ["350px", "-350px"]);
 
   return (
     <div className="min-h-screen bg-background text-on-surface relative overflow-x-hidden selection:bg-primary selection:text-white" ref={scrollRef}>
@@ -33,22 +42,22 @@ export default function LandingPage() {
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="px-6 lg:px-12 flex items-center justify-between h-28 lg:h-32 relative z-50 w-full max-w-[1400px] mx-auto"
+        className="px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between h-auto md:h-28 lg:h-32 relative z-50 w-full max-w-[1400px] mx-auto mt-6 lg:mt-12 gap-6 md:gap-0"
       >
-        <div className="flex-1" /> {/* Left spacer */}
+        <div className="hidden md:block flex-1" /> {/* Left spacer - Desktop only */}
         
         <Link href="/" className="flex items-center justify-center cursor-pointer flex-shrink-0">
-          <div className="relative w-80 h-32 lg:w-[480px] lg:h-48 flex items-center justify-center">
+          <div className="relative w-64 h-24 sm:w-80 sm:h-32 lg:w-[480px] lg:h-48 flex items-center justify-center">
             <Image src="/images/logo.webp" alt="e-motion logo" fill className="object-contain drop-shadow-sm" priority sizes="(max-width: 768px) 320px, 480px" />
           </div>
         </Link>
         
-        <nav className="flex-1 flex justify-end items-center space-x-6">
+        <nav className="w-full md:w-auto flex-1 hidden md:flex justify-end items-center space-x-6">
           <Link href="/login">
              <motion.button 
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="px-6 py-2 rounded-full shadow-sm font-semibold bg-surface/80 backdrop-blur-md hover:bg-surface-container-low text-on-surface transition-colors focus:outline-none"
+                className="px-6 py-2 rounded-full shadow-sm font-semibold bg-surface border border-outline/20 dark:border-outline-variant/50 hover:bg-surface-container-highest text-on-surface transition-colors focus:outline-none"
              >
               HR Portal
              </motion.button>
@@ -58,7 +67,7 @@ export default function LandingPage() {
 
       <main>
         {/* UPPER HERO SECTION */}
-        <section className="relative pt-6 pb-20 px-6 lg:px-12 w-full max-w-[1400px] mx-auto">
+        <section className="relative pt-0 pb-10 lg:pb-20 px-6 lg:px-12 w-full max-w-[1400px] mx-auto">
           <motion.div 
             style={{ y: yHeroText, opacity: opacityHero }}
             className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-center"
@@ -67,38 +76,45 @@ export default function LandingPage() {
             <div className="flex flex-col items-start z-10 text-left">
               <motion.div 
                 initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.1 }}
-                className="inline-flex items-center px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs lg:text-sm font-semibold mb-6 backdrop-blur-md border border-primary/20"
+                className="w-full flex items-center justify-between mb-6"
               >
-                <span className="w-2 h-2 rounded-full bg-primary mr-2 animate-pulse" />
-                Privacy-First HR Analytics
+                <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs lg:text-sm font-semibold backdrop-blur-md border border-primary/20">
+                  <span className="w-2 h-2 rounded-full bg-primary mr-2 animate-pulse" />
+                  Privacy-First HR Analytics
+                </div>
+                
+                <Link href="/login" className="md:hidden">
+                   <button className="px-5 py-2 rounded-full shadow-sm font-semibold bg-surface border border-outline/20 dark:border-outline-variant/50 hover:bg-surface-container-highest text-on-surface transition-colors focus:outline-none text-xs">
+                    HR Portal
+                   </button>
+                </Link>
               </motion.div>
 
               <motion.h1 
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}
-                className="font-manrope text-[2.75rem] leading-[1.1] md:text-5xl lg:text-[4.5rem] xl:text-[5rem] font-medium tracking-tight mb-4 text-on-surface"
+                className="font-manrope text-[2.5rem] leading-[1.1] md:text-5xl lg:text-[4.5rem] xl:text-[5rem] font-medium tracking-tight mb-2 text-on-surface"
               >
                 Sense the emotion. <br/>
-                <span className="text-secondary block mt-1 font-light">Protect the individual.</span>
+                <span className="text-secondary block mt-0 font-light">Protect the individual.</span>
               </motion.h1>
 
               <motion.p 
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}
-                className="font-inter text-base lg:text-lg text-on-surface-variant max-w-lg leading-relaxed mb-8"
+                className="font-inter text-sm lg:text-lg text-on-surface-variant max-w-lg leading-relaxed mb-6"
               >
                 Safely translate ambient and behavioral signals into aggregated team insights. Enhance focus and predict fatigue without crossing personal boundaries.
               </motion.p>
 
               <motion.div 
                 initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.4 }}
-                className="flex flex-col sm:flex-row items-start sm:items-center gap-4"
+                className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full"
               >
-                 <Link href="/login">
-                   <Button className="h-12 px-8 text-base rounded-full shadow-ambient hover:shadow-lg transition-all duration-300 group">
+                 <Link href="/login" className="w-full sm:w-auto">
+                   <Button className="h-14 px-10 text-lg w-full sm:w-auto rounded-full shadow-ambient hover:shadow-lg transition-all duration-300 group">
                      Access Platform
-                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                     <ArrowRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
                    </Button>
                  </Link>
-                 <span className="text-xs font-inter text-outline font-medium px-2 opacity-60 flex items-center"><ShieldCheck className="w-4 h-4 mr-1"/> Minimum cohort: 5+</span>
               </motion.div>
             </div>
 
@@ -116,33 +132,40 @@ export default function LandingPage() {
 
 
         {/* MIDDLE SECTION - CORE PILLARS (VERTICAL EXPANSION) */}
-        <section className="relative py-24 w-full bg-surface-container-lowest border-y border-outline-variant/10">
+        <section ref={sectionRef} className="relative py-24 w-full bg-surface-container-lowest border-y border-outline-variant/10">
            <div className="absolute inset-0 opacity-30 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
            
            <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
-             <motion.div 
-               initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.8 }}
-               className="text-center max-w-2xl mx-auto mb-16"
-             >
-               <h2 className="font-manrope text-3xl md:text-5xl font-medium tracking-tight mb-4">A new dimension of <span className="text-[#0F766E] italic">organizational clarity.</span></h2>
-               <p className="font-inter text-on-surface-variant text-lg">We shift the focus from tracking individuals to understanding the structural heartbeat of your teams.</p>
-             </motion.div>
+             <div className="w-full mb-16 py-4 flex flex-col items-center">
+               <motion.h2 
+                 style={{ x: xText1 }} 
+                 className="font-manrope text-3xl md:text-5xl font-medium tracking-tight mb-4 text-center max-w-3xl"
+               >
+                 A new dimension of <span className="block text-[#0F766E] italic mt-2">organizational clarity.</span>
+               </motion.h2>
+               <motion.p 
+                 style={{ x: xText2 }} 
+                 className="font-inter text-on-surface-variant text-lg text-center max-w-2xl"
+               >
+                 We shift the focus from tracking individuals to understanding the structural heartbeat of your teams.
+               </motion.p>
+             </div>
 
              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {[
-                  { icon: <Activity />, title: "Pattern Detection", desc: "Correlate context-switching and meeting density with drops in cognitive throughput.", color: "text-primary", bg: "bg-primary/5" },
-                  { icon: <Lock />, title: "Absolute Privacy", desc: "Edge-computing and strict thresholding (n>5) guarantee that no single employee is ever exposed.", color: "text-secondary", bg: "bg-secondary/5" },
-                  { icon: <Zap />, title: "Predictive Interventions", desc: "Get alerted before burnout escalates. Receive actionable insights to structurally improve workflows.", color: "text-[#0F766E]", bg: "bg-[#0F766E]/5" },
+                  { icon: <BrainCircuit className="w-7 h-7 stroke-[1.5]" />, title: "Pattern Detection", desc: "Correlate context-switching and meeting density with drops in cognitive throughput.", color: "text-primary", bg: "bg-primary/5" },
+                  { icon: <ShieldCheck className="w-7 h-7 stroke-[1.5]" />, title: "Absolute Privacy", desc: "Edge-computing and strict thresholding (n>5) guarantee that no single employee is ever exposed.", color: "text-secondary", bg: "bg-secondary/5" },
+                  { icon: <Sparkles className="w-7 h-7 stroke-[1.5]" />, title: "Predictive Interventions", desc: "Get alerted before burnout escalates. Receive actionable insights to structurally improve workflows.", color: "text-[#0F766E]", bg: "bg-[#0F766E]/5" },
                 ].map((feature, i) => (
                   <motion.div 
                     key={i}
                     initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.7, delay: i * 0.15 }}
-                    className={`rounded-[2rem] p-8 border border-outline-variant/15 ${feature.bg} hover:-translate-y-2 transition-transform duration-500`}
+                    className={`rounded-[2.5rem] p-10 border border-outline-variant/15 ${feature.bg} hover:-translate-y-2 transition-transform duration-500 shadow-sm`}
                   >
                     <div className={`w-14 h-14 rounded-2xl bg-surface shadow-sm border border-outline-variant/10 flex items-center justify-center ${feature.color} mb-6`}>
                       {feature.icon}
                     </div>
-                    <h3 className="font-manrope text-xl font-semibold mb-3">{feature.title}</h3>
+                    <h3 className="font-manrope text-2xl font-semibold mb-3 tracking-tight">{feature.title}</h3>
                     <p className="font-inter text-sm text-on-surface-variant leading-relaxed">{feature.desc}</p>
                   </motion.div>
                 ))}

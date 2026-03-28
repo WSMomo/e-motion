@@ -152,17 +152,17 @@ export default function DashboardOverview() {
       </motion.section>
 
       {/* Main Content Layout Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
          
          {/* Left Column (2 span): Charts Array */}
-         <div className="col-span-1 lg:col-span-2 flex flex-col gap-8">
+         <div className="col-span-1 lg:col-span-2 flex flex-col gap-6">
             
             {/* 1. Radar & Calendar Overview */}
-            <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card elevation="lowest" className="p-6 border border-outline-variant/10 shadow-sm flex flex-col min-h-[350px]">
+            <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full min-w-0">
+              <Card elevation="lowest" className="p-6 border border-outline-variant/10 shadow-sm flex flex-col min-h-[350px] overflow-hidden">
                 <h3 className="font-manrope text-xl font-medium tracking-tight mb-1">Signal Health Radar</h3>
                 <p className="font-inter text-xs text-on-surface-variant mb-4">Aggregate scoring across 5 key dimensions</p>
-                <div className="flex-1 w-full min-h-[250px]">
+                <div className="flex-1 w-full min-h-[250px] min-w-0">
                   <ResponsiveContainer width="100%" height="100%">
                     <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
                       <PolarGrid stroke="var(--theme-outline-variant)" />
@@ -175,10 +175,10 @@ export default function DashboardOverview() {
                 </div>
               </Card>
 
-              <Card elevation="lowest" className="p-6 border border-outline-variant/10 shadow-sm flex flex-col min-h-[350px]">
+              <Card elevation="lowest" className="p-6 border border-outline-variant/10 shadow-sm flex flex-col min-h-[350px] overflow-hidden">
                 <h3 className="font-manrope text-xl font-medium tracking-tight mb-1">Calendar & Meetings</h3>
                 <p className="font-inter text-xs text-on-surface-variant mb-4">Signal: Uninterrupted Focus vs Meeting Load</p>
-                <div className="flex-1 w-full min-h-[250px]">
+                <div className="flex-1 w-full min-h-[250px] min-w-0">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={calendarData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--theme-outline-variant)" opacity={0.3} />
@@ -195,12 +195,12 @@ export default function DashboardOverview() {
             </motion.div>
 
             {/* 2. Cognitive & Productivity Area */}
-            <motion.div variants={itemVariants}>
-               <Card elevation="lowest" className="p-8 border border-outline-variant/10 shadow-sm relative min-h-[350px]">
+            <motion.div variants={itemVariants} className="w-full min-w-0">
+               <Card elevation="lowest" className="p-8 border border-outline-variant/10 shadow-sm relative min-h-[350px] overflow-hidden">
                   <h3 className="font-manrope text-2xl font-light tracking-tight mb-1">Productivity & Cognitive Flow</h3>
                   <p className="font-inter text-sm text-on-surface-variant mb-6">Signal: Typing speed baseline deviation and error rate</p>
                   <PrivacyMask defaultRevealed={true} reason="Aggregated keystroke patterns mapped anonymously.">
-                    <div className="h-64 w-full">
+                    <div className="h-64 w-full min-w-0">
                       <ResponsiveContainer width="100%" height="100%">
                         <AreaChart data={cognitiveData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
                           <defs>
@@ -225,11 +225,11 @@ export default function DashboardOverview() {
             </motion.div>
 
             {/* 3. Work Patterns & Communication */}
-            <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-               <Card elevation="lowest" className="p-6 border border-outline-variant/10 shadow-sm flex flex-col min-h-[350px]">
+            <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full min-w-0">
+               <Card elevation="lowest" className="p-6 border border-outline-variant/10 shadow-sm flex flex-col min-h-[350px] overflow-hidden">
                   <h3 className="font-manrope text-xl font-medium tracking-tight mb-1">Work Patterns</h3>
                   <p className="font-inter text-xs text-on-surface-variant mb-4">Signal: Session length & After-hours activity</p>
-                  <div className="flex-1 w-full min-h-[250px]">
+                  <div className="flex-1 w-full min-h-[250px] min-w-0">
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={workPatternData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--theme-outline-variant)" opacity={0.3} />
@@ -244,10 +244,10 @@ export default function DashboardOverview() {
                   </div>
                </Card>
 
-               <Card elevation="lowest" className="p-6 border border-outline-variant/10 shadow-sm flex flex-col min-h-[350px]">
+               <Card elevation="lowest" className="p-6 border border-outline-variant/10 shadow-sm flex flex-col min-h-[350px] overflow-hidden">
                   <h3 className="font-manrope text-xl font-medium tracking-tight mb-1">Collaboration</h3>
                   <p className="font-inter text-xs text-on-surface-variant mb-4">Signal: Response latency vs Network size</p>
-                  <div className="flex-1 w-full min-h-[250px]">
+                  <div className="flex-1 w-full min-h-[250px] min-w-0">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={communicationData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--theme-outline-variant)" opacity={0.3} />
@@ -264,12 +264,12 @@ export default function DashboardOverview() {
             </motion.div>
 
             {/* 4. Physiological Data */}
-            <motion.div variants={itemVariants}>
-               <Card elevation="lowest" className="p-8 border border-outline-variant/10 shadow-sm relative min-h-[300px]">
+            <motion.div variants={itemVariants} className="w-full min-w-0">
+               <Card elevation="lowest" className="p-8 border border-outline-variant/10 shadow-sm relative min-h-[300px] overflow-hidden">
                   <h3 className="font-manrope text-2xl font-light tracking-tight mb-1">Physiological Resilience</h3>
                   <p className="font-inter text-sm text-on-surface-variant mb-6">Signal: (Optional Wearable) Aggregated HRV vs Resting HR trend</p>
                   <PrivacyMask defaultRevealed={true} reason="Aggregated wearable metrics. Raw individual data never hits servers.">
-                    <div className="h-48 w-full">
+                    <div className="h-48 w-full min-w-0">
                       <ResponsiveContainer width="100%" height="100%">
                         <LineChart data={physiologicalData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
                           <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--theme-outline-variant)" opacity={0.3} />

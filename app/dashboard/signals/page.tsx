@@ -64,27 +64,30 @@ export default function SignalsPage() {
 
       <section className="space-y-6">
         {signalSources.map((source, idx) => (
-          <Card key={idx} elevation="lowest" className="p-8 border border-outline-variant/10 shadow-sm flex flex-col md:flex-row gap-8 items-stretch relative overflow-hidden group">
+          <Card key={idx} elevation="lowest" className="p-8 border border-outline-variant/10 shadow-sm grid grid-cols-1 md:grid-cols-4 gap-8 relative overflow-hidden group">
             
-            <div className="absolute top-0 right-0 w-64 h-full opacity-[0.03] group-hover:opacity-10 transition-opacity duration-700 pointer-events-none" style={{ backgroundColor: source.color }} />
+            <div 
+              className="absolute inset-0 opacity-[0.04] group-hover:opacity-[0.12] transition-opacity duration-700 pointer-events-none" 
+              style={{ background: `radial-gradient(circle at bottom right, ${source.color}, transparent 70%)` }} 
+            />
 
-            <div className="md:w-1/4 flex flex-col justify-center">
+            <div className="md:col-span-1 flex flex-col justify-center">
               <h3 className="font-manrope text-xl font-semibold text-on-surface mb-2">{source.title}</h3>
               <p className="font-inter text-[13px] text-on-surface-variant leading-relaxed">{source.description}</p>
             </div>
             
-            <div className="md:w-2/4 bg-surface-container-lowest border border-outline-variant/10 p-6 rounded-2xl flex flex-col sm:flex-row gap-6 relative z-10">
+            <div className="md:col-span-2 bg-surface-container-lowest border border-outline-variant/10 p-6 rounded-2xl flex flex-col md:flex-row gap-6 relative z-10 w-full min-w-0 overflow-hidden">
               <div className="flex-1">
                 <span className="font-inter text-[10px] font-bold uppercase tracking-widest text-primary mb-2 block">Privacy Guarantee</span>
                 <p className="font-inter text-xs text-on-surface-variant leading-relaxed">{source.privacy}</p>
               </div>
-              <div className="border-l border-outline-variant/15 pl-6 flex-1">
+              <div className="md:border-l border-t md:border-t-0 border-outline-variant/15 md:pl-6 pt-4 md:pt-0 flex-1">
                 <span className="font-inter text-[10px] font-bold uppercase tracking-widest text-[#0F766E] mb-2 block">Processing Model</span>
                 <p className="font-inter text-xs text-on-surface-variant leading-relaxed">{source.processing}</p>
               </div>
             </div>
 
-            <div className="md:w-1/4 h-28 md:h-auto bg-surface flex items-center justify-center rounded-xl p-4 border border-outline-variant/5">
+            <div className="md:col-span-1 min-h-[140px] md:h-auto bg-surface flex items-center justify-center rounded-xl p-4 border border-outline-variant/5 w-full min-w-0 overflow-hidden">
                 <ResponsiveContainer width="100%" height="100%">
                   {source.chartType === 'bar' ? (
                      <BarChart data={staticBarData}>
