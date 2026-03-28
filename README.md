@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Team 2: e-motion: Privacy-First HR Analytics
+
+e-motion is a specialized, privacy-first organizational clarity platform designed to track structural team wellbeing, context switching, and cognitive flow without compromising individual data privacy (enforcing aggregated strict minimum thresholds, e.g., n > 5).
+
+## Tech Stack
+- **Framework:** Next.js (App Router)
+- **Styling:** Tailwind CSS
+- **Animations:** Framer Motion
+- **Data Visualization:** Recharts
+- **Icons:** Lucide React
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+Make sure you have Node.js (version 18+ recommended) and npm installed on your machine.
+
+### Development Server
+
+To run the application in development mode with hot-reloading:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+
+> [!TIP]
+> If you encounter an address-in-use error (e.g., port 3000 is still active from a zombie process), use the following command before starting the dev server:
+> ```bash
+> npx kill-port 3000 && npm run dev
+> ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Building for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To create an optimized production build of the application:
 
-## Learn More
+1. Clean previous build caches and compile the Next.js app:
+   ```bash
+   rm -rf .next
+   npm run build
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. Start the compiled production server:
+   ```bash
+   npm run start
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The production server will spin up, allowing you to view and test the fully optimized app natively.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `app/page.tsx`: The main marketing and presentation Landing Page, equipped with advanced Framer Motion parallax sections.
+- `app/dashboard/`: The core HR portal containing analytics on Teams, Signals, and overarching KPIs.
+- `app/dashboard/components/`: Stores custom UI primitives, Navigation Drawers, and Top/Side headers used exclusively across internal dashboard views.
+- `public/images/`: Stores all static graphics and icons.
+- `tailwind.config.ts`: Contains the custom B2B pastel aesthetic themes and unified design tokens.
