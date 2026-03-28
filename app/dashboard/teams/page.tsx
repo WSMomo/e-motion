@@ -4,6 +4,7 @@ import { Card } from '../../components/ui/Card';
 import { PrivacyMask } from '../../components/ui/PrivacyMask';
 import { AreaChart, Area, ResponsiveContainer, YAxis } from 'recharts';
 
+
 const mockTrendData = (baseFocus: number, variance: number) => {
   return Array.from({ length: 14 }).map((_, i) => ({
     day: `D${i + 1}`,
