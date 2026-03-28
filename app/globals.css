@@ -1,26 +1,83 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Fonts */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-manrope: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  /* Mapped Colors from CSS Variables */
+  --color-background: var(--theme-bg);
+  --color-surface: var(--theme-surface);
+  --color-surface-container-lowest: var(--theme-surface-lowest);
+  --color-surface-container-low: var(--theme-surface-low);
+  --color-surface-container-high: var(--theme-surface-high);
+  --color-surface-container-highest: var(--theme-surface-highest);
+  
+  --color-primary: var(--theme-primary);
+  --color-primary-container: var(--theme-primary-container);
+  --color-on-primary: var(--theme-on-primary);
+  
+  --color-secondary: var(--theme-secondary);
+  --color-secondary-container: var(--theme-secondary-container);
+  
+  --color-on-surface: var(--theme-on-surface);
+  --color-on-surface-variant: var(--theme-on-surface-variant);
+  --color-outline: var(--theme-outline);
+  --color-outline-variant: var(--theme-outline-variant);
+
+  /* Shadows */
+  --shadow-ambient: 0 8px 40px 0 rgba(139, 117, 186, 0.08);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+    /* Light Mode - Calming Lavender & Sage */
+    --theme-bg: #FCFCFD;
+    --theme-surface: #FFFFFF;
+    --theme-surface-lowest: #FFFFFF;
+    --theme-surface-low: #F5F4F8;
+    --theme-surface-high: #EDEAF4;
+    --theme-surface-highest: #E5E1EE;
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    --theme-primary: #8B75BA; /* Lavender */
+    --theme-primary-container: #E8E3F2;
+    --theme-on-primary: #FFFFFF;
+
+    --theme-secondary: #7FA394; /* Sage Green */
+    --theme-secondary-container: #E0EDE6;
+
+    --theme-on-surface: #2D2936;
+    --theme-on-surface-variant: #5E596B;
+    --theme-outline: #A19BAD;
+    --theme-outline-variant: #D1CDDA;
+  }
+
+  .dark {
+    /* Soft Pastel Dark Mode - Calming Deep Lavender/Sage */
+    --theme-bg: #1E1A25;
+    --theme-surface: #262130;
+    --theme-surface-lowest: #1A1621;
+    --theme-surface-low: #2D2838;
+    --theme-surface-high: #383146;
+    --theme-surface-highest: #4F475F;
+
+    --theme-primary: #BCAEE0; /* Muted Light Lavender */
+    --theme-primary-container: #493B6B;
+    --theme-on-primary: #FFFFFF;
+
+    --theme-secondary: #9CC0AD; /* Muted Light Sage */
+    --theme-secondary-container: #3E5A4D;
+
+    --theme-on-surface: #F8F7FA;
+    --theme-on-surface-variant: #D9D2E6;
+    --theme-outline: #89819A;
+    --theme-outline-variant: #5A516E;
+  }
+
+  body {
+    background-color: var(--theme-bg);
+    color: var(--theme-on-surface);
+  }
 }
