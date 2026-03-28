@@ -216,7 +216,7 @@ export default function DashboardOverview() {
                           <Tooltip contentStyle={TooltipStyle} />
                           <Legend iconType="circle" wrapperStyle={{ fontSize: '12px', paddingTop: '20px' }} />
                           <Area yAxisId="left" type="monotone" name="Typing Consistency (%)" dataKey="typingSpeed" stroke="var(--theme-primary)" strokeWidth={3} fillOpacity={1} fill="url(#colorTyping)" />
-                          <Line yAxisId="right" type="step" name="Error Rate Deviation" dataKey="errorRate" stroke="var(--theme-secondary)" strokeWidth={3} dot={{ strokeWidth: 2, r: 4 }} />
+                          <Line yAxisId="right" type="monotone" name="Error Rate Deviation" dataKey="errorRate" stroke="var(--theme-secondary)" strokeWidth={3} dot={{ strokeWidth: 2, r: 4 }} />
                         </AreaChart>
                       </ResponsiveContainer>
                     </div>
